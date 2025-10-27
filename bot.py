@@ -5,6 +5,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 # === BOT SETTINGS ===
 BOT_TOKEN = "8095856335:AAELT9NIm_mxREHMvykzkJHiOnrwC9XQv60"
 CHANNEL_LINK = "https://t.me/+gwpx1n_VBZJmNzc0"
+GROUP_LINK = "https://t.me/+CjcVnktCaC8wMDVk"  # Fixed from your partial link
 # =====================
 
 logging.basicConfig(
@@ -16,10 +17,20 @@ logger = logging.getLogger(__name__)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     name = user.first_name or user.username or "there"
-    text = f"Hi {name}! 👋\nTap the button below to open our channel:"
-    keyboard = [[InlineKeyboardButton("Open channel", url=CHANNEL_LINK)]]
+
+    text = (
+        f"*{name.upper()}, JOIN UP QUICK – STAY PLUGGED IN FOR EVERYDAY FRESH LIST & CRYPTO LEADS UPDATE!* 🏪🥇\n\n"
+        "🔥 *FORWARD THIS MSG TO 15+ CONTACTS & GROUP CHATS, YOUR SUPPORT MEANS A LOT!* 👏\n\n"
+        "💎 *PM @ime FOR FREE LIST – DON’T SLEEP ON IT. LET’S GET IT BUZZING!* 💼📹"
+    )
+
+    keyboard = [
+        [InlineKeyboardButton("📢 JOIN CHANNEL", url=CHANNEL_LINK)],
+        [InlineKeyboardButton("💬 JOIN GROUP CHAT", url=GROUP_LINK)]
+    ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text(text, reply_markup=reply_markup)
+
+    await update.message.reply_text(text, reply_markup=reply_markup, parse_mode='Markdown')
 
 def main():
     app = ApplicationBuilder().token(BOT_TOKEN).build()
