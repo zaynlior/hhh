@@ -4,9 +4,9 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 # === BOT SETTINGS ===
 BOT_TOKEN = "8095856335:AAELT9NIm_mxREHMvykzkJHiOnrwC9XQv60"
-CHANNEL_LINK = "https://t.me/+gwpx1n_VBZJmNzc0"
-GROUP_LINK = "https://t.me/+CjcVnktCaC8wMDVk"  
-ADMIN_LINK = "https://t.me/Mon3yMoTime"  
+CHANNEL_LINK = = "https://t.me/+gwpx1n_VBZJmNzc0"
+GROUP_LINK = = "https://t.me/+CjcVnktCaC8wMDVk"
+ADMIN_LINK = "https://t.me/Mon3yMoTime"
 # =====================
 
 logging.basicConfig(
@@ -22,22 +22,35 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = (
         f"*{name.upper()}, JOIN UP QUICK – STAY PLUGGED IN FOR EVERYDAY FRESH FULLZ & CRYPTO LEADS UPDATE!* 🏪🥇\n\n"
         "🔥 *FORWARD THIS MSG TO 15+ CONTACTS & GROUP CHATS, YOUR SUPPORT MEANS A LOT!* 👏\n\n"
-        "💎 *PM @Mon3yMoTime FOR FREE LIST – DON��T SLEEP ON IT. LET’S GET IT BUZZING!* 💼📹"
+        "💎 *PM @Mon3yMoTime FOR FREE LIST – DON’T SLEEP ON IT. LET’S GET IT BUZZING!* 💼📹"
     )
 
-    # keyboard must be a list of rows (each row is a list of InlineKeyboardButton)
+    # Vertical keyboard layout (one button per row)
     keyboard = [
-        [InlineKeyboardButton("💬 CONTACT MO", url=ADMIN_LINK), InlineKeyboardButton("📢 JOIN CHANNEL", url=CHANNEL_LINK)],
+        [InlineKeyboardButton("💬 CONTACT MO", url=ADMIN_LINK)],
+        [InlineKeyboardButton("📢 JOIN CHANNEL", url=CHANNEL_LINK)],
         [InlineKeyboardButton("💬 JOIN GROUP CHAT", url=GROUP_LINK)]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    await update.message.reply_text(text, reply_markup=reply_markup, parse_mode='Markdown')
+    message_obj = update.message or update.effective_message
+    if message_obj is None:
+        return
+
+    try:
+        await message_obj.reply_text(text, reply_markup=reply_markup, parse_mode='Markdown')
+    except Exception:
+        logger.exception("Failed to send start message (error swallowed to avoid crash)")
+
+# Global error handler — prevents 'No error handlers are registered' warning
+async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE):
+    logger.exception("Exception while handling an update: %s", context.error)
 
 def main():
     app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
+    app.add_error_handler(error_handler)
     app.run_polling()
 
-if __name__ == "__main__":
+if name == "__main__":
     main()
