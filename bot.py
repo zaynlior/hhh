@@ -22,14 +22,13 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = (
         f"*{name.upper()}, JOIN UP QUICK – STAY PLUGGED IN FOR EVERYDAY FRESH FULLZ & CRYPTO LEADS UPDATE!* 🏪🥇\n\n"
         "🔥 *FORWARD THIS MSG TO 15+ CONTACTS & GROUP CHATS, YOUR SUPPORT MEANS A LOT!* 👏\n\n"
-        "💎 *PM @Mon3yMoTime FOR FREE LIST – DON’T SLEEP ON IT. LET’S GET IT BUZZING!* 💼📹"
+        "💎 *PM @Mon3yMoTime FOR FREE LIST – DON��T SLEEP ON IT. LET’S GET IT BUZZING!* 💼📹"
     )
 
+    # keyboard must be a list of rows (each row is a list of InlineKeyboardButton)
     keyboard = [
-        [InlineKeyboardButton("💬 CONTACT MO", url=ADMIN_LINK)]
-        [InlineKeyboardButton("📢 JOIN CHANNEL", url=CHANNEL_LINK)],
+        [InlineKeyboardButton("💬 CONTACT MO", url=ADMIN_LINK), InlineKeyboardButton("📢 JOIN CHANNEL", url=CHANNEL_LINK)],
         [InlineKeyboardButton("💬 JOIN GROUP CHAT", url=GROUP_LINK)]
-        
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
