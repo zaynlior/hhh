@@ -4,8 +4,8 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 # === BOT SETTINGS ===
 BOT_TOKEN = "8095856335:AAELT9NIm_mxREHMvykzkJHiOnrwC9XQv60"
-CHANNEL_LINK = = "https://t.me/+gwpx1n_VBZJmNzc0"
-GROUP_LINK = = "https://t.me/+CjcVnktCaC8wMDVk"
+CHANNEL_LINK = "https://t.me/+gwpx1n_VBZJmNzc0"
+GROUP_LINK = "https://t.me/+CjcVnktCaC8wMDVk"
 ADMIN_LINK = "https://t.me/Mon3yMoTime"
 # =====================
 
